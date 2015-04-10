@@ -1,0 +1,25 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<meta charset="UTF-8">
+	<title>The PROFILE PAGE</title>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+</head>
+<body>
+
+	<div class="container">
+		<h1>Hi <%= user.email %></h1>
+		<form method="POST" action="/logout?_method=DELETE">
+			<button>Logout</button>
+		</form>
+		<form method="POST" action="/logout?_method=DELETE">
+			<button>Mystery Logout</button>
+		</form>
+	</div>
+
+</body>
+</html>
