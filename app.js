@@ -38,7 +38,7 @@ app.use(session({
 
 //Set up ROUTES...
 app.get('/', function(req, res) {
-	res.render('index', {title: "Index Page"});
+	res.render('index', {title: "The Pain Free App"});
 });
 
 app.get("/signup", function(req, res) {
@@ -50,7 +50,12 @@ app.post("/signup", function(req, res) {
 	var password = req.body.password;
 	db.User.createSecure(email, password)
 	  .then(function(user) {
-	  	res.redirect("users/profile");
+	  	if(user) {
+	  		req.login(user);
+	  		res.redirect("/profile");
+	  	} else {
+	  		 res.redirect("/login");
+	  	}
 	  });
 });
 
@@ -89,10 +94,51 @@ app.get("/profile", function(req, res) {
 	});
 });
 
+app.post("/profile", function(req, res) {
+	db.User.create(req.body.user)
+		   .then(function(users) {
+		   	res.redirect('/users/index');
+		   });
+});
+
 app.delete("/logout", function(req, res) {
 	req.logout();
 	res.redirect('/login');
 });
+
+
+//ROUTES...
+app.get('/dailies', function(req, res) {
+	db.Daily.findAll(
+		{include: [db.User]})
+		.then(function(dailies) {
+			res.render("dailies/index", {dailiesList: dailies});
+	});
+});
+
+app.get('/dailies/new', function(req, res) {
+	db.User.all().then(function(users) {
+  		res.render('dailies/new', {ejsUsers: users});
+  	});
+});
+
+app.post('/dailies', function(req, res) {
+	db.Daily.create(req.body.daily)
+			  .then(function(dailies) {
+			  	res.redirect('/dailies');
+			  });
+});
+
+app.get('/dailies/:id', function(req, res) {
+	db.Daily.find( {where: {id: req.params.id}, include: [db.User]})
+			  .then(function(dailies) {
+			  	res.render('dailies/daily', {dailyToDisplay: dailies});
+	});
+});
+
+
+
+
 
 
 

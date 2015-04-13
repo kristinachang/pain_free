@@ -1,0 +1,21 @@
+<!--views/articles/index.ejs-->
+<!DOCTYPE HTML>
+<html>
+<body>
+<img src="http://i288.photobucket.com/albums/ll198/hellokittykettlebells/images_zpsemmqek4p.png" alt="Special Edition">
+
+<h2>All Daily Logs:</h2>
+
+<% dailiesList.forEach(function(daily) { %>
+<div style="margin-top: 10px;">
+  <a href="/dailies/<%= daily.id %>"><%= daily.date %></a><br />
+  Scale: <%= daily.pain_scale  %>
+  <br />
+</div>
+<% }) %>
+
+<br><br>
+<a href="/">Back to My Home Page</a>
+
+</body>
+</html>

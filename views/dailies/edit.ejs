@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+  </head>
+  <body>
+    <h1>Edit A Daily Log</h1>
+    <form method="post" action="/articles/<%= article.id %>?_method=PUT">
+      <input type="text" name="article[title]" placeholder="Article title" value="<%= article.title %>"><br />
+      <input type="text" name="article[author]" placeholder="Article author" value="<%= article.author %>"><br />
+      <textarea name="article[content]">
+      	<%= daily.content %>
+      </textarea><br />
+      <button>Save </button>
+    </form>
+  </body>
+</html>

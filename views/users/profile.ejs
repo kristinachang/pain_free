@@ -4,22 +4,63 @@
 <head>
 
 	<meta charset="UTF-8">
-	<title>The PROFILE PAGE</title>
+	<title>User Profile</title>
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
 </head>
 <body>
 
 	<div class="container">
-		<h1>Hi <%= user.email %></h1>
-		<form method="POST" action="/logout?_method=DELETE">
-			<button>Logout</button>
-		</form>
-		<form method="POST" action="/logout?_method=DELETE">
-			<button>Mystery Logout</button>
-		</form>
+		<h3>Welcome <%= user.email %></h3>
+		<h4>Please complete your profile to continue:</h4>
+
+		<div class="row">
+  			<div class="col-xs-12 col-sm-6 col-md-8">
+  				<form method="POST" action="/profile">
+  					<input type="text" name="first_name" placeholder="First Name">
+  					<input type="text" name="last_name" placeholder="Last Name">
+  					<input type="text" name="address_1" placeholder="Address">
+  					<input type="text" name="address_2" placeholder="Address Line 2">	
+  					<input type="text" name="city" placeholder="City">
+  					<input type="text" name="state" placeholder="State">
+  					<input type="text" name="zip" placeholder="Zip Code">
+  					<input type="text" name="phone" placeholder="Phone Number">
+  					<input type="text" name="age" placeholder="Age">
+  					<input type="text" name="occupation" placeholder="Occupation">
+  					<input type="text" name="height" placeholder="Height">
+  					<input type="text" name="weight" placeholder="Weight">
+  					<button>Submit</button>
+  				</form>
+  			</div>
+		</div>
+		
+		<div class="row">
+  			<div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
+  			<div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
+  			<!-- Optional: clear the XS cols if their content doesn't match in height -->
+  			<div class="clearfix visible-xs-block"></div>
+  			<div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
+		</div>
+
+		
 	</div>
+
+
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-6">
+				<form method="POST" action="/logout?_method=DELETE">
+					<button>Logout</button>
+				</form>	
+			</div>
+		</div>
+	</div>
+
 
 </body>
 </html>
