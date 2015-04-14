@@ -44,6 +44,7 @@ module.exports = function(sequelize, DataTypes) {
       associate: function(models) {
         // associations can be defined here
         this.hasMany(models.Daily);
+        this.belongsTo(models.Specialist);
       },
       encryptPassword: function(password) {
         var hash = bcrypt.hashSync(password, salt);

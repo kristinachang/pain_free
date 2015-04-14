@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+
+	<meta charset="UTF-8">
+	<title>User Home</title>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+	<h1>Specialist: <%= specialist.first_name %> <%= specialist.last_name %></h1>
+		<div>
+			<h2>My Clients:</h2>
+  			<ul>
+  				<% specialist.Users.forEach(function(article) {  %>
+  				<li><a href="/users/<%= user.id  %>"><%= user.first_name  %></a></li>
+  				<% });  %>
+ 			 </ul>
+		</div>
+
+
+		<br><br>
+		<a href="/">Back to the Main Page</a>
+
+</body>
+</html>

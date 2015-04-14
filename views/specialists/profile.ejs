@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<meta charset="UTF-8">
+	<title>Specialist Profile</title>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+	<div class="container">
+		<h3>Welcome <%= specialist.email %></h3>
+		<h4>Please complete your profile to continue:</h4>
+	
+		<h1>THIS IS THE PROFILE ID: <%= specialist.id %></h1>
+
+		<div class="row">
+  			<div class="col-xs-12 col-sm-6 col-md-8">
+  				<form method="POST" action="/specialists/profile?_method=PUT">
+  					<input type="text" name="first_name" placeholder="First Name" value="<%=specialist.first_name %>">
+  					<input type="text" name="last_name" placeholder="Last Name" value="<%=specialist.last_name %>">
+  					<input type="text" name="address_1" placeholder="Address" value="<%=specialist.address_1 %>">
+  					<input type="text" name="address_2" placeholder="Address Line 2" value="<%=specialist.address_2 %>">	
+  					<input type="text" name="city" placeholder="City" value="<%=specialist.city %>">
+  					<input type="text" name="state" placeholder="State" value="<%=specialist.state %>">
+  					<input type="text" name="zip" placeholder="Zip Code" value="<%=specialist.zip %>">
+  					<input type="text" name="phone" placeholder="Phone Number" value="<%=specialist.phone %>">
+  					<input type="text" name="age" placeholder="Age" value="<%=specialist.age %>">
+  					<input type="text" name="occupation" placeholder="Occupation" value="<%=specialist.occupation %>">
+  					<input type="text" name="certs" placeholder="Certifications" value="<%=specialist.certs %>">
+  					<button>Submit</button>
+  				</form>
+  			</div>
+		</div>
+		
+		<div class="row">
+  			<div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
+  			<div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
+  			<!-- Optional: clear the XS cols if their content doesn't match in height -->
+  			<div class="clearfix visible-xs-block"></div>
+  			<div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
+		</div>
+
+		
+	</div>
+
+
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-6">
+				<form method="POST" action="/logout?_method=DELETE">
+					<button>Logout</button>
+				</form>	
+			</div>
+		</div>
+	</div>
+
+
+</body>
+</html>
