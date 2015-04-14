@@ -1,15 +1,13 @@
 <!DOCTYPE HTML>
 <html>
 <body>
-<h1>Daily Log: <%= dailyToDisplay.date %></h1>
+<h1>Daily Log: <%= dailyDisplay.date %></h1>
 <div>
-  <ul>
-  	<!--<li>: <%= dailyToDisplay.Author.first_name  %> <%= dailyToDisplay.Author.last_name  %></li>-->
-  	<li>What Hurts: <%= dailyToDisplay.pain_area %></li>
-  	<li>Pain Scale: <%= dailyToDisplay.pain_scale %></li>
-  	<li>Comment: <%= dailyToDisplay.comment  %></li>
-
-  </ul>
+	<ul>
+  	  <li>What Hurts: <%= dailyDisplay.pain_area_1 %></li>
+  	  <li>Pain Scale: <%= dailyDisplay.pain_scale %></li>
+  	  <li>Comment: <%= dailyDisplay.comment  %></li>
+    </ul>
 </div>
 
 <a href="/dailies">Back to All Daily Logs</a><br><br>

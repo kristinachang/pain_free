@@ -5,11 +5,11 @@
   </head>
   <body>
     <h1>Edit A Daily Log</h1>
-    <form method="post" action="/articles/<%= article.id %>?_method=PUT">
-      <input type="text" name="article[title]" placeholder="Article title" value="<%= article.title %>"><br />
-      <input type="text" name="article[author]" placeholder="Article author" value="<%= article.author %>"><br />
-      <textarea name="article[content]">
-      	<%= daily.content %>
+    <form method="post" action="/dailies/<%= daily.id %>?_method=PUT">
+      <input type="text" name="daily[date]" placeholder="Log date" value="<%= daily.date %>"><br />
+      <input type="text" name="daily[pain_area_1]" placeholder="pain_area_1" value="<%= daily.pain_area_1 %>"><br />
+      <textarea name="article[comment]">
+      	<%= daily.comment %>
       </textarea><br />
       <button>Save </button>
     </form>

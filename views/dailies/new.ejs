@@ -7,15 +7,11 @@
   <body>
     <h1>Add A Daily Log</h1>
     <form method="post" action="/dailies">
+      <input type="text" name="daily[UserId]" style="display:none;" value="<%= UserId %>">
       <input type="text" name="daily[date]" placeholder="Today's Date"><br/>
-      <!--<select name="daily[AuthorId]">
-        <option value="">Select an author...</option>
-        <% ejsAuthors.forEach(function(author) { %>
-          <option value="<%= author.id %>"><%= author.first_name %> <%= author.last_name %></option>
-        <% })  %>
-      </select>-->
+    
       <br/>
-      <input type="text" name="daily[pain_area]" placeholder="Pain Area"><br/>
+      <input type="text" name="daily[pain_area_1]" placeholder="Pain Area 1"><br/>
       <input type="text" name="daily[pain_scale]" placeholder="Pain Scale"><br/>
       <textarea name="daily[comment]"></textarea><br/>
       <button>Save </button>

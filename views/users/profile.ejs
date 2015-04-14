@@ -18,22 +18,24 @@
 	<div class="container">
 		<h3>Welcome <%= user.email %></h3>
 		<h4>Please complete your profile to continue:</h4>
+	
+		<h1>THIS IS THE PROFILE ID: <%= user.id %></h1>
 
 		<div class="row">
   			<div class="col-xs-12 col-sm-6 col-md-8">
-  				<form method="POST" action="/profile">
-  					<input type="text" name="first_name" placeholder="First Name">
-  					<input type="text" name="last_name" placeholder="Last Name">
-  					<input type="text" name="address_1" placeholder="Address">
-  					<input type="text" name="address_2" placeholder="Address Line 2">	
-  					<input type="text" name="city" placeholder="City">
-  					<input type="text" name="state" placeholder="State">
-  					<input type="text" name="zip" placeholder="Zip Code">
-  					<input type="text" name="phone" placeholder="Phone Number">
-  					<input type="text" name="age" placeholder="Age">
-  					<input type="text" name="occupation" placeholder="Occupation">
-  					<input type="text" name="height" placeholder="Height">
-  					<input type="text" name="weight" placeholder="Weight">
+  				<form method="POST" action="/profile?_method=PUT">
+  					<input type="text" name="first_name" placeholder="First Name" value="<%=user.first_name %>">
+  					<input type="text" name="last_name" placeholder="Last Name" value="<%=user.first_name %>">
+  					<input type="text" name="address_1" placeholder="Address" value="<%=user.first_name %>">
+  					<input type="text" name="address_2" placeholder="Address Line 2" value="<%=user.first_name %>">	
+  					<input type="text" name="city" placeholder="City" value="<%=user.first_name %>">
+  					<input type="text" name="state" placeholder="State" value="<%=user.first_name %>">
+  					<input type="text" name="zip" placeholder="Zip Code" value="<%=user.first_name %>">
+  					<input type="text" name="phone" placeholder="Phone Number" value="<%=user.first_name %>">
+  					<input type="text" name="age" placeholder="Age" value="<%=user.first_name %>">
+  					<input type="text" name="occupation" placeholder="Occupation" value="<%=user.first_name %>">
+  					<input type="text" name="height" placeholder="Height" value="<%=user.first_name %>">
+  					<input type="text" name="weight" placeholder="Weight" value="<%=user.first_name %>">
   					<button>Submit</button>
   				</form>
   			</div>

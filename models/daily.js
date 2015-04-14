@@ -10,12 +10,13 @@ module.exports = function(sequelize, DataTypes) {
     pain_area_5: DataTypes.STRING,
     pain_scale: DataTypes.INTEGER,
     comment: DataTypes.TEXT,
-    client_id: DataTypes.INTEGER,
+    UserId: DataTypes.INTEGER,
     first_name: DataTypes.STRING
   }, {
     classMethods: {
       associate: function(models) {
         // associations can be defined here
+        this.belongsTo(models.User);
       }
     }
   });

@@ -87,6 +87,7 @@ app.get("/profile", function(req, res) {
 	req.currentUser()
 	   .then(function(user) {
 	   if (user) {
+	   	//console.log("THIS IS USER", user);
 	   		res.render('users/profile', {user: user});
 	   } else {
 	   	 res.redirect('/login');
@@ -94,11 +95,15 @@ app.get("/profile", function(req, res) {
 	});
 });
 
-app.post("/profile", function(req, res) {
-	db.User.create(req.body.user)
-		   .then(function(users) {
-		   	res.redirect('/users/index');
-		   });
+//should be put
+app.put("/profile", function(req, res) {
+	req.currentUser()
+	  .then(function(user){
+	  	user.updateAttributes(req.body)
+	  	  .then(function(user){
+	  	  	res.redirect('/users/index');
+	  	  });
+	});
 });
 
 app.delete("/logout", function(req, res) {
@@ -108,18 +113,20 @@ app.delete("/logout", function(req, res) {
 
 
 //ROUTES...
+app.get('/users/index', function(req, res, user) {
+	res.render('users/index', {user: user});
+})
+
 app.get('/dailies', function(req, res) {
 	db.Daily.findAll(
-		{include: [db.User]})
+		{where: {UserId: req.session.userId}})
 		.then(function(dailies) {
 			res.render("dailies/index", {dailiesList: dailies});
 	});
 });
 
 app.get('/dailies/new', function(req, res) {
-	db.User.all().then(function(users) {
-  		res.render('dailies/new', {ejsUsers: users});
-  	});
+  		res.render('dailies/new', {UserId: req.session.userId});
 });
 
 app.post('/dailies', function(req, res) {
@@ -130,9 +137,9 @@ app.post('/dailies', function(req, res) {
 });
 
 app.get('/dailies/:id', function(req, res) {
-	db.Daily.find( {where: {id: req.params.id}, include: [db.User]})
-			  .then(function(dailies) {
-			  	res.render('dailies/daily', {dailyToDisplay: dailies});
+	db.Daily.find(req.params.id)
+			  .then(function(daily) {
+			  	res.render('dailies/daily', {dailyDisplay: daily});
 	});
 });
 
