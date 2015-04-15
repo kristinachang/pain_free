@@ -88,7 +88,7 @@ app.post("/login", function(req, res) {
 	  .then(function(user) {
 	  if(user) {
 	  	req.login(user);
-	  	if(user.address_1) {
+	  	if(user.first_name) {
 	  		res.redirect('/users/index');
 	  	} else {
 	  		res.redirect("/profile");
