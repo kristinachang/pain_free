@@ -36,6 +36,12 @@
   					<input type="text" name="occupation" placeholder="Occupation" value="<%=user.occupation %>" required>
   					<input type="text" name="height" placeholder="Height" value="<%=user.height %>" required>
   					<input type="text" name="weight" placeholder="Weight" value="<%=user.weight %>" required>
+  					<select name="user[SpecialistId]">
+        				<option value="">My Specialist is...</option>
+    					<% specialists.forEach(function(specialist) { %>
+	          				<option value="<%= specialist.id %>"><%= specialist.first_name + ' ' + specialist.last_name %></option>
+    					<% })  %>
+      				</select>
   					<button>Submit</button>
   				</form>
   			</div>

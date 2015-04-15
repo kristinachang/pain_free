@@ -104,7 +104,11 @@ app.get("/profile", function(req, res) {
 	   .then(function(user) {
 	   if (user) {
 	   	//console.log("THIS IS USER", user);
-	   		res.render('users/profile', {user: user});
+	   		db.Specialist.all().then(function(specialists) {
+	   		console.log('********************');
+	   		console.log(specialists);
+	   		res.render('users/profile', {user: user, specialists: specialists});
+	   	})
 	   } else {
 	   	 res.redirect('/login');
 	   }
