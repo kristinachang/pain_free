@@ -9,6 +9,12 @@ var methodOverride = require("method-override");
 var app = express();
 var db = require('./models');
 
+var accountSid = 'AC0c28892f41cd56992a3988d7c5ed33f4';
+var authToken = "d53bae72f182971a1e040a3224bd18e6";
+var client = require('twilio')(accountSid, authToken);
+
+
+
 app.set('view engine', 'ejs');
 app.use("/", function (req, res, next) {
 	req.login = function(user,specialist) {
@@ -148,7 +154,14 @@ app.get('/dailies/new', function(req, res) {
 app.post('/dailies', function(req, res) {
 	db.Daily.create(req.body.daily)
 			.then(function(dailies) {
-			  	res.redirect('/dailies');
+				client.messages.create({
+				    body: req.body.daily.comment,
+				    to: "+14088987910",
+				    from: "+14087405373"
+				}, function(err, message) {
+   					 process.stdout.write(message.sid);
+   					 res.redirect('/dailies');
+				});
 			  });
 });
 
