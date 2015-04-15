@@ -1,21 +1,31 @@
 <!--views/articles/index.ejs-->
 <!DOCTYPE HTML>
 <html>
+	<head>
+      <meta charset="UTF-8">
+      	<title>User Home</title>
+
+    	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+  	</head>
+
 <body>
-<img src="http://i288.photobucket.com/albums/ll198/hellokittykettlebells/images_zpsemmqek4p.png" alt="Special Edition">
+	<img src="http://i288.photobucket.com/albums/ll198/hellokittykettlebells/images_zpsemmqek4p.png" alt="Special Edition">
 
-<h2>All Daily Logs:</h2>
+	<h2>All Daily Logs:</h2>
 
-<% dailiesList.forEach(function(daily) { %>
-<div style="margin-top: 10px;">
-  <a href="/dailies/<%= daily.id %>"><%= daily.date %></a><br />
-  Scale: <%= daily.pain_scale  %>
-  <br />
-</div>
-<% }) %>
+		<% dailiesList.forEach(function(daily) { %>
+		<div style="margin-top: 10px;">
+  			<a href="/dailies/<%= daily.id %>"><%= daily.date %></a><br />
+ 			 Scale: <%= daily.pain_scale  %>
+ 			 <br />
+		</div>
+			<% }) %>
 
-<br><br>
-<a href="/">Back to My Home Page</a>
+		<br><br>
+		<a href="/">Back to My Home Page</a>
 
 </body>
 </html>

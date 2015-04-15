@@ -11,18 +11,30 @@ var db = require('./models');
 
 app.set('view engine', 'ejs');
 app.use("/", function (req, res, next) {
-	req.login = function(user) {
+	req.login = function(user,specialist) {
+		req.session.specialist = specialist;
 		req.session.userId = user.id;
+		console.log('\n\n\n\n\n\n\n\n\n', req.session);
 	};
-	req.currentUser = function() {
-		return db.User.find(req.session.userId)
+	req.currentUser = function(specialist) {
+		if (req.session.specialist) {
+			console.log("IM SPECIaLIST");
+		  return db.Specialist.find(req.session.userId)
 			.then(function(user) {
 				req.user = user;
 				return user;
 			});
+		} else {
+		  return db.User.find(req.session.userId)
+			.then(function(user) {
+				req.user = user;
+				return user;
+			});
+		}
 	};
 	req.logout = function() {
 		req.session.userId = null;
+		req.session.specialist = null;
 		req.user = null;
 	};
 	next(); 
@@ -76,7 +88,11 @@ app.post("/login", function(req, res) {
 	  .then(function(user) {
 	  if(user) {
 	  	req.login(user);
-	  	res.redirect("/profile");
+	  	if(user.address_1) {
+	  		res.redirect('/users/index');
+	  	} else {
+	  		res.redirect("/profile");
+	  	}
 	  } else {
 	  	 res.redirect("/login");
 	  }
@@ -152,7 +168,7 @@ app.post("/specialists/signup", function(req, res) {
 	db.Specialist.createSecure(email, password)
 	  .then(function(specialist) {
 	  	if(specialist) {
-	  		req.login(specialist);
+	  		req.login(specialist,true);
 	  		res.redirect("/specialists/profile");
 	  	} else {
 	  		 res.redirect("/specialists/login");
@@ -176,7 +192,7 @@ app.post("/specialists/login", function(req, res) {
 	db.Specialist.authenticate(email, password)
 	  .then(function(specialist) {
 	  if(specialist) {
-	  	req.login(specialist);
+	  	req.login(specialist, true);
 	  	res.redirect("/specialists/profile");
 	  } else {
 	  	 res.redirect("/specialists/login");
@@ -229,7 +245,6 @@ app.get('/specialists/specialist', function(req, res) {
 // 				 	res.render('specialists/specialist', {specialist: specialist});
 // 				 });
 // });
-
 
 
 
