@@ -104,10 +104,8 @@ app.get("/profile", function(req, res) {
 	   .then(function(user) {
 	   if (user) {
 	   	//console.log("THIS IS USER", user);
-	   		db.Specialist.all().then(function(specialists) {
-	   		console.log('********************');
-	   		console.log(specialists);
-	   		res.render('users/profile', {user: user, specialists: specialists});
+   		db.Specialist.all().then(function(specialists) {
+		   		res.render('users/profile', {user: user, specialists: specialists});
 	   	})
 	   } else {
 	   	 res.redirect('/login');
@@ -256,7 +254,7 @@ app.get('/specialists/specialist', function(req, res) {
 
 
 db.sequelize.sync().then(function() {
-	app.listen(3000, function() {
+	app.listen(process.env.PORT || 3000, function() {
 		console.log("Listening on PORT 3000!")
 	}); 
 });
