@@ -232,10 +232,11 @@ app.get('/specialists/index', function(req, res, specialist) {
 });
 
 app.get('/specialists/specialist', function(req, res) {
-	db.User.findAll(
-		{where: {SpecialistId: req.session.specialistId}})
+	var specialist = db.Specialist.find(req.session.specialistId);
+	var users = db.User.findAll(
+		{where: {SpecialistId: specialist.id}})
 		.then(function(users) {
-			res.render("specialists/specialist", {users: users});
+			res.render("specialists/specialist", {users: users, specialist: specialist});
 	});
 });
 
