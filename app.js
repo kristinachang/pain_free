@@ -56,8 +56,16 @@ app.use(session({
 
 //Set up Site Routes...
 app.get('/', function(req, res) {
-	res.render('index', {title: "The Pain Free App"});
+	res.render('site/index', {title: "The Pain Free App"});
 });
+
+app.get('/about', function(req, res) {
+	res.render('site/about');
+});
+app.get('/contact', function(req, res) {
+	res.render('site/contact');
+})
+
 //Set up User Routes...
 app.get("/signup", function(req, res) {
 	res.render("users/signup");
