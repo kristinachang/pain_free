@@ -208,7 +208,7 @@ app.post("/specialists/signup", function(req, res) {
 	db.Specialist.createSecure(email, password)
 	  .then(function(specialist) {
 	  	if(specialist) {
-	  		req.login(specialist,true);
+	  		req.login(specialist);
 	  		res.redirect("/specialists/profile");
 	  	} else {
 	  		 res.redirect("/specialists/login");
@@ -233,7 +233,7 @@ app.post("/specialists/login", function(req, res) {
 	  .then(function(specialist) {
 	  if(specialist) {
 	  	req.login(null, specialist);
-	  	// specialist, true  ?
+	  	//req.login(specialist, true);
 	  	if(specialist.first_name) {
 	  		res.redirect("/specialists/index");
 	  	} else {
@@ -304,11 +304,11 @@ app.get('/specialists/specialist', function(req, res) {
 
 
 
-db.sequelize.sync().then(function() {
-	app.listen(process.env.PORT || 3000, function() {
-		console.log("Listening on PORT 3000!")
-	}); 
-});
+// db.sequelize.sync().then(function() {
+// 	app.listen(process.env.PORT || 3000, function() {
+// 		console.log("Listening on PORT 3000!")
+// 	}); 
+// });
 
 
 
