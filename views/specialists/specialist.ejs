@@ -45,9 +45,9 @@
 		<div>
 			<h2>My Clients:</h2>
   			<ul>
-  				<% users.forEach(function(user) {  %>
-  				<li><a href="/users/<%= user.id  %>"><%= user.first_name  %></a></li>
-  				<% });  %>
+  				<% users.forEach(function(user) { %>
+  				<li><a href="/users/<%= user.id  %>"><%= user.first_name %> <%= user.last_name %></a></li>
+  				<% }); %>
  			 </ul>
 		</div>
 

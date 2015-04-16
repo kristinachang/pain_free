@@ -154,6 +154,13 @@ app.get('/users/index', function(req, res, user) {
 	res.render('users/index', {user: user});
 });
 
+app.get('/users/:id', function(req, res) {
+	db.User.find({ where: {id: req.params.id}, include: [db.Daily]})
+			.then(function(user) {
+				res.render('users/user', {userDisplay: user});
+	});
+});
+
 //Set up DailyLog Routes...
 app.get('/dailies', function(req, res) {
 	db.Daily.findAll(
