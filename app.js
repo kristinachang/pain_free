@@ -19,21 +19,24 @@ app.set('view engine', 'ejs');
 app.use("/", function (req, res, next) {
 	req.login = function(user, specialist) {
 		if (user) {
+			console.log("req.login => I'M A USER!");
 			req.session.userId = user.id;
 		} else if (specialist) {
+			console.log("req.login => I'M A SPECIALIST!");
 			req.session.specialist = specialist.id;
 		}
 		// console.log('\n\n\n\n\n\n\n\n\n', req.session.specialist);
 	};
 	req.currentUser = function(specialist) {
 		if (req.session.specialist) {
-			//console.log("IM SPECIaLIST");
+			console.log("req.currentuser() => IM A SPECIALIST");
 		  return db.Specialist.find(req.session.specialist)
 			.then(function(user) {
 				req.user = user;
 				return user;
 			});
 		} else {
+			console.log("req.currentuser() => IM A USER");
 		  return db.User.find(req.session.userId)
 			.then(function(user) {
 				req.user = user;
@@ -205,13 +208,16 @@ app.get("/specialists/signup", function(req, res) {
 app.post("/specialists/signup", function(req, res) {
 	var email = req.body.email;
 	var password = req.body.password;
+	
 	db.Specialist.createSecure(email, password)
 	  .then(function(specialist) {
 	  	if(specialist) {
+	  		console.log('/specialists/signup - specialist is TRUE');
 	  		req.login(specialist);
 	  		res.redirect("/specialists/profile");
 	  	} else {
-	  		 res.redirect("/specialists/login");
+	  		console.log('else /specialists/login - specialist is FALSE');
+	  		res.redirect("/specialists/login");
 	  	}
 	  });
 });
@@ -249,16 +255,19 @@ app.get("/specialists/profile", function(req, res) {
 	req.currentUser()
 	   .then(function(specialist) {
 	   if (specialist) {
-	   	//console.log("THIS IS SPECIALIST", specialist);
-	   	  if (!specialist.certs) {
-	   		console.log('I AM NOT A SPECIALIST');
-	   	  	req.logout();
-	   	  	res.redirect('/specialists/login');
-	   	  } else {
+	   	console.log("THIS IS SPECIALIST", specialist);
+	   	 //  if (!specialist.certs) {
+	   		// console.log('I AM NOT A SPECIALIST');
+	   	 //  	req.logout();
+	   	 //  	console.log('SORRY redirect to specialists/login');
+	   	 //  	res.redirect('/specialists/login');
+	   	 //  } else {
+	   	  	console.log("YOU'RE IN!");
 	   		res.render('specialists/profile', {specialist: specialist});
-	   		}
+	   		// }
 	   } else {
-	   	 res.redirect('/specialists/login');
+	   		console.log('ELSE redirect to specialists/login');
+	   		res.redirect('/specialists/login');
 	   }
 	});
 });
@@ -304,11 +313,11 @@ app.get('/specialists/specialist', function(req, res) {
 
 
 
-// db.sequelize.sync().then(function() {
-// 	app.listen(process.env.PORT || 3000, function() {
-// 		console.log("Listening on PORT 3000!")
-// 	}); 
-// });
+db.sequelize.sync().then(function() {
+	app.listen(process.env.PORT || 3000, function() {
+		console.log("Listening on PORT 3000!")
+	}); 
+});
 
 
 
