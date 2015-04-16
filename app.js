@@ -36,7 +36,7 @@ app.use("/", function (req, res, next) {
 				return user;
 			});
 		} else {
-			console.log("req.currentuser() => IM A USER");
+			// console.log("req.currentuser() => IM A USER");
 		  return db.User.find(req.session.userId)
 			.then(function(user) {
 				req.user = user;
@@ -158,16 +158,22 @@ app.get('/users/index', function(req, res, user) {
 });
 
 app.get('/users/:id', function(req, res) {
-	db.User.find({ where: {id: req.params.id}, include: [db.Daily]})
+	db.User.find({ where: {id: req.params.id}})
 			.then(function(user) {
-				res.render('users/user', {userDisplay: user});
+				db.Daily.findAll({where: {
+					client_id: user.id
+				}}).then(function(dailies){
+					res.render('users/user', {userDisplay: user, dailies: dailies});
+				});
+				//res.render('users/user', {userDisplay: user});
 	});
 });
 
 //Set up DailyLog Routes...
 app.get('/dailies', function(req, res) {
+	console.log("GOT TO DAILIES");
 	db.Daily.findAll(
-		{where: {UserId: req.session.userId}})
+		{where: {client_id: req.session.userId}})
 		.then(function(dailies) {
 			res.render("dailies/index", {dailiesList: dailies});
 	});
@@ -178,8 +184,11 @@ app.get('/dailies/new', function(req, res) {
 });
 
 app.post('/dailies', function(req, res) {
+	console.log("HERE");
+	console.log(req.body);
 	db.Daily.create(req.body.daily)
 			.then(function(dailies) {
+				console.log("HERE2");
 				req.currentUser().then(function(user){
 				    client.messages.create({
 				    body: req.body.daily.comment,

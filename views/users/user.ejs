@@ -46,7 +46,7 @@
 <div>
 	<h2>Daily Logs By Client:</h2>
     <ul>
-      <% userDisplay.Dailies.forEach(function(daily) { %>
+      <% dailies.forEach(function(daily) { %>
         <li><a href="/dailies/<%= daily.id %>"><%= daily.date %></a>
             <a href="/dailies/<%= daily.id %>"><%= daily.pain_scale %></a>
         </li>

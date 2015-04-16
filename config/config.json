@@ -1,6 +1,6 @@
 {
   "development": {
-    "database": "painfree_app",
+    "database": "other_pf",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },

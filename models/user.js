@@ -43,7 +43,7 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate: function(models) {
         // associations can be defined here
-        this.hasMany(models.Daily);
+       // this.hasMany(models.Daily);
         this.belongsTo(models.Specialist);
       },
       encryptPassword: function(password) {
