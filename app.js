@@ -17,10 +17,13 @@ var client = require('twilio')(accountSid, authToken);
 
 app.set('view engine', 'ejs');
 app.use("/", function (req, res, next) {
-	req.login = function(user,specialist) {
-		req.session.specialist = user.id;
-		req.session.userId = user.id;
-		console.log('\n\n\n\n\n\n\n\n\n', req.session.specialist);
+	req.login = function(user, specialist) {
+		if (user) {
+			req.session.userId = user.id;
+		} else if (specialist) {
+			req.session.specialist = specialist.id;
+		}
+		// console.log('\n\n\n\n\n\n\n\n\n', req.session.specialist);
 	};
 	req.currentUser = function(specialist) {
 		if (req.session.specialist) {
@@ -101,7 +104,7 @@ app.post("/login", function(req, res) {
 	db.User.authenticate(email, password)
 	  .then(function(user) {
 	  if(user) {
-	  	req.login(user);
+	  	req.login(user, null);
 	  	if(user.first_name) {
 	  		res.redirect('/users/index');
 	  	} else {
@@ -217,7 +220,8 @@ app.post("/specialists/login", function(req, res) {
 	db.Specialist.authenticate(email, password)
 	  .then(function(specialist) {
 	  if(specialist) {
-	  	req.login(specialist, true);
+	  	req.login(null, specialist);
+	  	// specialist, true  ?
 	  	if(specialist.first_name) {
 	  		res.redirect("/specialists/index");
 	  	} else {
