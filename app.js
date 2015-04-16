@@ -91,7 +91,12 @@ app.post("/signup", function(req, res) {
 app.get("/login", function(req, res) {
 	req.currentUser().then(function(user) {
 		if (user) {
+			if (!user.SpecialistId) {
+				req.logout();
+				res.redirect('/login');
+			} else {
 			res.redirect('/profile');
+			}
 		} else {
 			res.render('users/login');
 		}
@@ -238,7 +243,13 @@ app.get("/specialists/profile", function(req, res) {
 	   .then(function(specialist) {
 	   if (specialist) {
 	   	//console.log("THIS IS SPECIALIST", specialist);
+	   	  if (!specialist.certs) {
+	   		console.log('I AM NOT A SPECIALIST');
+	   	  	req.logout();
+	   	  	res.redirect('/specialists/login');
+	   	  } else {
 	   		res.render('specialists/profile', {specialist: specialist});
+	   		}
 	   } else {
 	   	 res.redirect('/specialists/login');
 	   }
