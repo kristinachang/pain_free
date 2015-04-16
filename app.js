@@ -44,6 +44,16 @@ app.use("/", function (req, res, next) {
 			});
 		}
 	};
+	req.currentSpecialist = function() {
+		if (req.session.specialist) {
+			console.log("req.currentuser() => IM A SPECIALIST");
+		  return db.Specialist.find(req.session.specialist)
+			.then(function(specialist) {
+				req.specialist = specialist;
+				return specialist;
+			});
+		}
+	};
 	req.logout = function() {
 		req.session.userId = null;
 		req.session.specialist = null;
@@ -213,7 +223,7 @@ app.post("/specialists/signup", function(req, res) {
 	  .then(function(specialist) {
 	  	if(specialist) {
 	  		console.log('/specialists/signup - specialist is TRUE');
-	  		req.login(specialist);
+	  		req.login(null, specialist);
 	  		res.redirect("/specialists/profile");
 	  	} else {
 	  		console.log('else /specialists/login - specialist is FALSE');
@@ -252,7 +262,7 @@ app.post("/specialists/login", function(req, res) {
 });
 
 app.get("/specialists/profile", function(req, res) {
-	req.currentUser()
+	req.currentSpecialist()
 	   .then(function(specialist) {
 	   if (specialist) {
 	   	console.log("THIS IS SPECIALIST", specialist);
