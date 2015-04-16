@@ -44,16 +44,6 @@ app.use("/", function (req, res, next) {
 			});
 		}
 	};
-	req.currentSpecialist = function() {
-		if (req.session.specialist) {
-			console.log("req.currentuser() => IM A SPECIALIST");
-		  return db.Specialist.find(req.session.specialist)
-			.then(function(specialist) {
-				req.specialist = specialist;
-				return specialist;
-			});
-		}
-	};
 	req.logout = function() {
 		req.session.userId = null;
 		req.session.specialist = null;
@@ -262,19 +252,19 @@ app.post("/specialists/login", function(req, res) {
 });
 
 app.get("/specialists/profile", function(req, res) {
-	req.currentSpecialist()
+	req.currentUser()
 	   .then(function(specialist) {
 	   if (specialist) {
 	   	console.log("THIS IS SPECIALIST", specialist);
-	   	 //  if (!specialist.certs) {
-	   		// console.log('I AM NOT A SPECIALIST');
-	   	 //  	req.logout();
-	   	 //  	console.log('SORRY redirect to specialists/login');
-	   	 //  	res.redirect('/specialists/login');
-	   	 //  } else {
+	   	  if (!specialist.certs) {
+	   		console.log('I AM NOT A SPECIALIST');
+	   	  	req.logout();
+	   	  	console.log('SORRY redirect to specialists/login');
+	   	  	res.redirect('/specialists/login');
+	   	  } else {
 	   	  	console.log("YOU'RE IN!");
 	   		res.render('specialists/profile', {specialist: specialist});
-	   		// }
+	   		}
 	   } else {
 	   		console.log('ELSE redirect to specialists/login');
 	   		res.redirect('/specialists/login');
