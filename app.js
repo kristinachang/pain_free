@@ -18,14 +18,14 @@ var client = require('twilio')(accountSid, authToken);
 app.set('view engine', 'ejs');
 app.use("/", function (req, res, next) {
 	req.login = function(user,specialist) {
-		req.session.specialist = specialist;
+		req.session.specialist = user.id;
 		req.session.userId = user.id;
-		console.log('\n\n\n\n\n\n\n\n\n', req.session);
+		console.log('\n\n\n\n\n\n\n\n\n', req.session.specialist);
 	};
 	req.currentUser = function(specialist) {
 		if (req.session.specialist) {
-			console.log("IM SPECIaLIST");
-		  return db.Specialist.find(req.session.userId)
+			//console.log("IM SPECIaLIST");
+		  return db.Specialist.find(req.session.specialist)
 			.then(function(user) {
 				req.user = user;
 				return user;
@@ -118,8 +118,8 @@ app.get("/profile", function(req, res) {
 	   .then(function(user) {
 	   if (user) {
 	   	//console.log("THIS IS USER", user);
-   		db.Specialist.all().then(function(specialists) {
-		   		res.render('users/profile', {user: user, specialists: specialists});
+   	   db.Specialist.all().then(function(specialists) {
+		 res.render('users/profile', {user: user, specialists: specialists});
 	   	})
 	   } else {
 	   	 res.redirect('/login');
@@ -130,7 +130,7 @@ app.get("/profile", function(req, res) {
 app.put("/profile", function(req, res) {
 	req.currentUser()
 	  .then(function(user){
-	  	user.updateAttributes(req.body)
+	  	user.updateAttributes(req.body.user)
 	  	  .then(function(user){
 	  	  	res.redirect('/users/index');
 	  	  });
@@ -139,7 +139,7 @@ app.put("/profile", function(req, res) {
 
 app.delete("/logout", function(req, res) {
 	req.logout();
-	res.redirect('/login');
+	res.redirect('/');
 });
 
 app.get('/users/index', function(req, res, user) {
@@ -162,15 +162,17 @@ app.get('/dailies/new', function(req, res) {
 app.post('/dailies', function(req, res) {
 	db.Daily.create(req.body.daily)
 			.then(function(dailies) {
-				client.messages.create({
+				req.currentUser().then(function(user){
+				    client.messages.create({
 				    body: req.body.daily.comment,
-				    to: "+14088987910",
+				    to: "+14088987910", // user.getSpecialist.phone
 				    from: "+14087405373"
-				}, function(err, message) {
+					}, function(err, message) {
    					 process.stdout.write(message.sid);
    					 res.redirect('/dailies');
+					});
 				});
-			  });
+			});
 });
 
 app.get('/dailies/:id', function(req, res) {
@@ -216,11 +218,15 @@ app.post("/specialists/login", function(req, res) {
 	  .then(function(specialist) {
 	  if(specialist) {
 	  	req.login(specialist, true);
-	  	res.redirect("/specialists/profile");
+	  	if(specialist.first_name) {
+	  		res.redirect("/specialists/index");
+	  	} else {
+	  		res.redirect("/specialists/profile");
+	  	}
 	  } else {
 	  	 res.redirect("/specialists/login");
 	  }
-	  });
+	});
 });
 
 app.get("/specialists/profile", function(req, res) {
@@ -247,7 +253,7 @@ app.put("/specialists/profile", function(req, res) {
 
 app.delete("/logout", function(req, res) {
 	req.logout();
-	res.redirect('/login');
+	res.redirect('/');
 });
 
 app.get('/specialists/index', function(req, res, specialist) {
@@ -255,12 +261,14 @@ app.get('/specialists/index', function(req, res, specialist) {
 });
 
 app.get('/specialists/specialist', function(req, res) {
-	var specialist = db.Specialist.find(req.session.specialistId);
-	var users = db.User.findAll(
-		{where: {SpecialistId: specialist.id}})
-		.then(function(users) {
-			res.render("specialists/specialist", {users: users, specialist: specialist});
-	});
+	db.Specialist.find(req.session.specialist).then(function(specialist) {
+		var users = db.User.findAll(
+			{where: {SpecialistId: specialist.id}})
+			.then(function(users) {
+				// console.log(users);
+				res.render("specialists/specialist", {users: users, specialist: specialist});
+		});
+	})
 });
 
 // app.get('/specialists/:id', function (req, res) {
