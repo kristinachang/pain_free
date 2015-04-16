@@ -208,9 +208,8 @@ app.get("/specialists/signup", function(req, res) {
 app.post("/specialists/signup", function(req, res) {
 	var email = req.body.email;
 	var password = req.body.password;
-	var certs = req.body.certs;
 
-	db.Specialist.createSecure(email, password, certs)
+	db.Specialist.createSecure(email, password)
 	  .then(function(specialist) {
 	  	if(specialist) {
 	  		console.log('/specialists/signup - specialist is TRUE');
@@ -257,7 +256,7 @@ app.get("/specialists/profile", function(req, res) {
 	   .then(function(specialist) {
 	   if (specialist) {
 	   	console.log("THIS IS SPECIALIST", specialist);
-	   	  if (!specialist.certs) {
+	   	  if (!specialist.special) {
 	   		console.log('I AM NOT A SPECIALIST');
 	   	  	req.logout();
 	   	  	console.log('SORRY redirect to specialists/login');

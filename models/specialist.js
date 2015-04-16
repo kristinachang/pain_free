@@ -28,7 +28,8 @@ module.exports = function(sequelize, DataTypes) {
     state: DataTypes.STRING,
     zip: DataTypes.STRING,
     phone: DataTypes.STRING,
-    certs: DataTypes.TEXT
+    certs: DataTypes.TEXT,
+    special: DataTypes.BOOLEAN
   }, 
 
   {
@@ -47,14 +48,14 @@ module.exports = function(sequelize, DataTypes) {
         var hash = bcrypt.hashSync(password, salt);
         return hash;
       },
-      createSecure: function(email, password, certs) {
+      createSecure: function(email, password) {
         if(password.length < 6) {
           throw new Error("Password too short");
         }
         return this.create({
           email: email,
           passwordDigest: this.encryptPassword(password),
-          certs: certs
+          special: true
         });
       },
       authenticate: function(email, password) {
