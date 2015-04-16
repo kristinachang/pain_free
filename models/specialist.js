@@ -47,13 +47,14 @@ module.exports = function(sequelize, DataTypes) {
         var hash = bcrypt.hashSync(password, salt);
         return hash;
       },
-      createSecure: function(email, password) {
+      createSecure: function(email, password, certs) {
         if(password.length < 6) {
           throw new Error("Password too short");
         }
         return this.create({
           email: email,
-          passwordDigest: this.encryptPassword(password)
+          passwordDigest: this.encryptPassword(password),
+          certs: certs
         });
       },
       authenticate: function(email, password) {

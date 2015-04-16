@@ -208,8 +208,9 @@ app.get("/specialists/signup", function(req, res) {
 app.post("/specialists/signup", function(req, res) {
 	var email = req.body.email;
 	var password = req.body.password;
-	
-	db.Specialist.createSecure(email, password)
+	var certs = req.body.certs;
+
+	db.Specialist.createSecure(email, password, certs)
 	  .then(function(specialist) {
 	  	if(specialist) {
 	  		console.log('/specialists/signup - specialist is TRUE');
