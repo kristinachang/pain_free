@@ -35,7 +35,8 @@ app.use("/", function (req, res, next) {
 				req.user = user;
 				return user;
 			});
-		} else {
+		} 
+		else if (req.session.user) {
 			console.log("req.currentuser() => IM A USER");
 		  return db.User.find(req.session.userId)
 			.then(function(user) {
@@ -233,9 +234,9 @@ app.get("/specialists/login", function(req, res) {
 });
 
 app.post("/specialists/login", function(req, res) {
-	var email = req.body.email;
+	var sEmail = req.body.sEmail;
 	var password = req.body.password;
-	db.Specialist.authenticate(email, password)
+	db.Specialist.authenticate(sEmail, password)
 	  .then(function(specialist) {
 	  if(specialist) {
 	  	req.login(null, specialist);
@@ -252,6 +253,7 @@ app.post("/specialists/login", function(req, res) {
 });
 
 app.get("/specialists/profile", function(req, res) {
+	console.log('/specialists/profile page!');
 	req.currentUser()
 	   .then(function(specialist) {
 	   if (specialist) {
