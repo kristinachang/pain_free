@@ -258,7 +258,7 @@ app.get("/specialists/profile", function(req, res) {
 	   .then(function(specialist) {
 	   if (specialist) {
 	   	console.log("THIS IS SPECIALIST", specialist);
-	   	  if (!specialist.sEmail) {
+	   	  if (!specialist.certs) {
 	   		console.log('I AM NOT A SPECIALIST');
 	   	  	req.logout();
 	   	  	console.log('SORRY redirect to specialists/login');
