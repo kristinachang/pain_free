@@ -5,13 +5,15 @@ var session = require("express-session");
 var pg = require("pg");
 var bodyParser = require("body-parser");
 var methodOverride = require("method-override");
+var env = process.env;
+var accounts_id = env.ACCOUNTS_ID;
+var auth_token = env.AUTH_TOKEN;
 
 var app = express();
 var db = require('./models');
 
-var accountSid = 'AC0c28892f41cd56992a3988d7c5ed33f4';
-var authToken = "d53bae72f182971a1e040a3224bd18e6";
-var client = require('twilio')(accountSid, authToken);
+
+var client = require('twilio')(accounts_id, auth_token);
 
 
 
