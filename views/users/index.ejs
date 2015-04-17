@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-	<title>The Index Page</title>
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  	<title>User Home</title>
+    <!-- Bootstrap -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
 
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-
+	
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="/stylesheets/style.css">
 	<link href='http://fonts.googleapis.com/css?family=Playfair+Display:400,700,400italic' rel='stylesheet' type='text/css'>
@@ -42,21 +41,22 @@
 	</div>
 
 	<div class="container">
-		<h3>Welcome <%= user.first_name %></h3>
-		<h4>Daily Log</h4>
+		<div class="jumbotron text-left">
+			<h3>Welcome <%= user.first_name %></h3>
+			<h4>Daily Log</h4>
 
-		<div class="row">
-  			<div class="col-xs-12 col-sm-6 col-md-8"><a href="/profile">View My Profile</a></div>
-		</div>
+			<div class="row">
+	  			<div class="col-xs-12 col-sm-6 col-md-8"><a href="/profile">View My Profile</a></div>
+			</div>
 
-		<div class="row">
-  			<div class="col-xs-6 col-sm-4"><a href="/dailies">View All My Entries</a></div>
+			<div class="row">
+	  			<div class="col-xs-6 col-sm-4"><a href="/dailies">View All My Entries</a></div>
+			</div>
+			
+			<div class="row">
+	  			<div class="col-xs-6 col-sm-4"><a href="/dailies/new">Log A New Entry</a></div>
+			</div>
 		</div>
-		
-		<div class="row">
-  			<div class="col-xs-6 col-sm-4"><a href="/dailies/new">Log A New Entry</a></div>
-		</div>
-
 	</div>
 
 	<div class="container">
@@ -84,5 +84,9 @@
 		</div>
 	</div>
 
-</body>
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="/stylesheets/bootstrap.min.js"></script>
+  </body>
 </html>

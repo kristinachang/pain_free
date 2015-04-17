@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-	<title>All Clients</title>
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  	<title>All Clients</title>
+    <!-- Bootstrap -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
 
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-
+	
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="/stylesheets/style.css">
 	<link href='http://fonts.googleapis.com/css?family=Playfair+Display:400,700,400italic' rel='stylesheet' type='text/css'>
@@ -41,10 +40,11 @@
 		</div>
 	</div>
 
-
-	<h1>Specialist: <%= specialist.first_name %> <%= specialist.last_name %></h1>
+	<div class="container">
+		<div class="jumbotron text-left">
+	<h2>Specialist: <%= specialist.first_name %> <%= specialist.last_name %></h2>
 		<div>
-			<h2>My Clients:</h2>
+			<h3>My Clients:</h3>
   			<ul>
   				<% users.forEach(function(user) { %>
   				<li><a href="/users/<%= user.id  %>"><%= user.first_name %> <%= user.last_name %></a></li>
@@ -55,7 +55,8 @@
 
 		<br><br>
 		<a href="/">Back to the Main Page</a>
-
+	</div>
+</div>
 
 
 	<div class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
@@ -72,5 +73,9 @@
 		</div>
 	</div>
 
-</body>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="/stylesheets/bootstrap.min.js"></script>
+  </body>
 </html>
