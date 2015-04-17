@@ -194,8 +194,8 @@ app.post('/dailies', function(req, res) {
 				req.currentUser().then(function(user){
 				    client.messages.create({
 				    body: req.body.daily.comment,
-				    to: "+14088987910", // user.getSpecialist.phone
-				    from: "+14087405373"
+				    to: env.NUM1, // user.getSpecialist.phone
+				    from: env.NUM2
 					}, function(err, message) {
    					 process.stdout.write(message.sid);
    					 res.redirect('/dailies');
