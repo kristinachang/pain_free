@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>Specialist Profile</title>
+	<title>Client Profile</title>
+
+	<link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
 
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-
+	
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="/stylesheets/style.css">
+	<link href='http://fonts.googleapis.com/css?family=Playfair+Display:400,700,400italic' rel='stylesheet' type='text/css'>
 </head>
 <body>
 
@@ -43,39 +43,73 @@
 
 
 	<div class="container">
-		<h3>Welcome <%= specialist.email %></h3>
+		<h3>Welcome <%= specialist.email %> !</h3>
 		<h4>Please complete your profile to continue:</h4>
 	
-		<h1>THIS IS THE PROFILE ID: <%= specialist.id %></h1>
+		<h5>THIS IS THE PROFILE ID: <%= specialist.id %></h5>
 
 		<div class="row">
   			<div class="col-xs-12 col-sm-6 col-md-8">
-  				<form method="POST" action="/specialists/profile?_method=PUT">
-  					<input type="text" name="first_name" placeholder="First Name" value="<%=specialist.first_name %>" required>
-  					<input type="text" name="last_name" placeholder="Last Name" value="<%=specialist.last_name %>" required>
-  					<input type="text" name="address_1" placeholder="Address" value="<%=specialist.address_1 %>" required>
-  					<input type="text" name="address_2" placeholder="Address Line 2" value="<%=specialist.address_2 %>">	
-  					<input type="text" name="city" placeholder="City" value="<%=specialist.city %>" required>
-  					<input type="text" name="state" placeholder="State" value="<%=specialist.state %>" required>
-  					<input type="text" name="zip" placeholder="Zip Code" value="<%=specialist.zip %>" required>
-  					<input type="text" name="phone" placeholder="Phone Number" value="<%=specialist.phone %>" required>
-  					<input type="text" name="age" placeholder="Age" value="<%=specialist.age %>" required>
-  					<input type="text" name="occupation" placeholder="Occupation" value="<%=specialist.occupation %>" required>
-  					<input type="text" name="certs" placeholder="Certifications" value="<%=specialist.certs %>" required>
-  					<button>Submit</button>
+  				<form method="POST" action="/specialists/profile?_method=PUT" class="form-horizontal" role="form">
+
+					<div class="form-group">
+  						<div class="col-xs-4">
+  							<input type="text" name="first_name" placeholder="First Name" value="<%=specialist.first_name %>" required>
+  						</div>
+  						<div class="col-xs-4">
+  							<input type="text" name="last_name" placeholder="Last Name" value="<%=specialist.last_name %>" required>
+  						</div>
+  					</div>
+
+  					<div class="form-group">
+  						<div class="col-xs-9">
+  							<input type="text" name="address_1" placeholder="Address" value="<%=specialist.address_1 %>" required>
+  						</div>
+  					</div>
+  					<div class="form-group">
+  						<div class="col-xs-9">
+  							<input type="text" name="address_2" placeholder="Address Line 2" value="<%=specialist.address_2 %>">
+  						</div>
+  					</div>
+
+					<div class="form-group">
+  						<div class="col-xs-4">
+  							<input type="text" name="city" placeholder="City" value="<%=specialist.city %>" required>
+  						</div>
+  						<div class="col-xs-4">
+  							<input type="text" name="state" placeholder="State" value="<%=specialist.state %>" required>
+  						</div>
+  						<div class="col-xs-4">
+  							<input type="text" name="zip" placeholder="Zip Code" value="<%=specialist.zip %>" required>
+  						</div>
+  					</div>
+  					
+  					<div class="form-group">
+  						<div class="col-xs-4">
+  							<input type="text" name="phone" placeholder="Phone Number" value="<%=specialist.phone %>" required>
+  						</div>
+  						<div class="col-xs-4">
+  							<input type="text" name="age" placeholder="Age" value="<%=specialist.age %>" required>
+  						</div>
+  						<div class="col-xs-4">
+  							<input type="text" name="occupation" placeholder="Occupation" value="<%=specialist.occupation %>" required>
+  						</div>
+  					</div>
+  					
+  					<div class="form-group">
+  						<div class="col-xs-8">
+  							<input type="text" name="certs" placeholder="Certifications" value="<%=specialist.certs %>" required>
+  						</div>
+  					</div>
+ 
+  					<div class="form-group">
+  						<div class="col-xs-9">
+  							<button>Submit</button>
+  						</div>
+  					</div>	
   				</form>
   			</div>
-		</div>
-		
-		<div class="row">
-  			<div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
-  			<div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
-  			<!-- Optional: clear the XS cols if their content doesn't match in height -->
-  			<div class="clearfix visible-xs-block"></div>
-  			<div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
-		</div>
-
-		
+		</div>	
 	</div>
 
 
@@ -105,5 +139,9 @@
 		</div>
 	</div>
 
-</body>
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="/stylesheets/bootstrap.min.js"></script>
+  </body>
 </html>

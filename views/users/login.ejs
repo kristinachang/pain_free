@@ -6,7 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>The Index Page</title>
+	<title>Client Log In</title>
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
@@ -16,6 +16,7 @@
 
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="/stylesheets/style.css">
+	<link href='http://fonts.googleapis.com/css?family=Playfair+Display:400,700,400italic' rel='stylesheet' type='text/css'>
 </head>
 <body>
 
@@ -41,20 +42,17 @@
 	</div>
 
 	<div class="container">
-		<div class="row">
-			<div class="col-xs-offset-4">Welcome Back! Please Log In</div>
+		<div class="jumbotron text-center">
+			<h3>Welcome Back! Please Log In</h3>
+			<form method="POST" action="/login">
+				<input type="text" name="email" placeholder="Email">
+				<input type="password" name="password" placeholder="Password">
+				<button>Log In</button>
+			</form>
 		</div>
-
-		<div class="row">
-  			<div class="col-xs-offset-4">
-  				<form method="POST" action="/login">
-					<input type="text" name="email" placeholder="Email">
-					<input type="password" name="password" placeholder="Password">
-					<button>Log In</button>
-				</form>
-			</div>									
-		</div>	
 	</div>
+
+
 
 
 	<div class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
