@@ -76,7 +76,15 @@ app.get('/contact', function(req, res) {
 
 //Set up User Routes...
 app.get("/signup", function(req, res) {
-	res.render("users/signup");
+	req.currentUser().then(function(user) {
+		if (user) {
+			console.log('Logging ' + user.email + ' out!');
+			req.logout();
+			res.redirect('/signup');
+		} else {
+			res.render("users/signup");
+		}
+	})
 });
 
 app.post("/signup", function(req, res) {
@@ -90,7 +98,7 @@ app.post("/signup", function(req, res) {
 	  	} else {
 	  		 res.redirect("/login");
 	  	}
-	  });
+	});
 });
 
 app.get("/login", function(req, res) {
@@ -160,15 +168,25 @@ app.get('/users/index', function(req, res, user) {
 });
 
 app.get('/users/:id', function(req, res) {
-	db.User.find({ where: {id: req.params.id}})
-			.then(function(user) {
-				db.Daily.findAll({where: {
-					client_id: user.id
-				}}).then(function(dailies){
-					res.render('users/user', {userDisplay: user, dailies: dailies});
-				});
-				//res.render('users/user', {userDisplay: user});
-	});
+	req.currentUser().then(function(current_user) {
+		if(current_user === null) { 
+			res.redirect('/');
+		} else {
+			db.User.find({ where: {id: req.params.id}})
+					.then(function(user) {
+						db.Daily.findAll({where: {
+							client_id: user.id
+						}}).then(function(dailies){
+							if (current_user.id === user.SpecialistId || current_user.id === user.id) {
+								res.render('users/user', {userDisplay: user, dailies: dailies});
+							} else {
+								res.redirect('/');
+							}
+						});
+						//res.render('users/user', {userDisplay: user});
+			});
+		}
+	})
 });
 
 //Set up DailyLog Routes...
@@ -213,7 +231,15 @@ app.get('/dailies/:id', function(req, res) {
 
 //Set up Specialist Routes...
 app.get("/specialists/signup", function(req, res) {
-	res.render("specialists/signup");
+	req.currentUser().then(function(user) {
+		if (user) {
+			console.log('Logging ' + user.email + ' out!');
+			req.logout();
+			res.redirect('/specialists/signup');
+		} else {
+			res.render("specialists/signup");
+		}
+	})
 });
 
 app.post("/specialists/signup", function(req, res) {
