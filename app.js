@@ -12,10 +12,7 @@ var auth_token = env.AUTH_TOKEN;
 var app = express();
 var db = require('./models');
 
-
 var client = require('twilio')(accounts_id, auth_token);
-
-
 
 app.set('view engine', 'ejs');
 app.use("/", function (req, res, next) {
@@ -345,10 +342,6 @@ app.get('/specialists/specialist', function(req, res) {
 // 				 	res.render('specialists/specialist', {specialist: specialist});
 // 				 });
 // });
-
-
-
-
 
 db.sequelize.sync().then(function() {
 	app.listen(process.env.PORT || 3000, function() {
