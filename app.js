@@ -19,7 +19,7 @@ var accountSid = env.TWILIO_ACCOUNT_SID;
 //console.log(accountSid);
 var authToken = env.TWILIO_AUTH_TOKEN;
 //console.log(authToken);
-var client = require('twilio')(accountSid, authToken);
+var client = require('twilio')();
 
 app.set('view engine', 'ejs');
 app.use("/", function (req, res, next) {
