@@ -5,14 +5,21 @@ var session = require("express-session");
 var pg = require("pg");
 var bodyParser = require("body-parser");
 var methodOverride = require("method-override");
-var env = process.env;
-var accounts_id = env.ACCOUNTS_ID;
-var auth_token = env.AUTH_TOKEN;
 
 var app = express();
 var db = require('./models');
 
-var client = require('twilio')(accounts_id, auth_token);
+var env = process.env;
+//console.log(env);
+var NUM1 = env.NUM1;
+//console.log(NUM1);
+var NUM2 = env.NUM2;
+//console.log(NUM2);
+var accountSid = env.TWILIO_ACCOUNT_SID;
+//console.log(accountSid);
+var authToken = env.TWILIO_AUTH_TOKEN;
+//console.log(authToken);
+var client = require('twilio')(accountSid, authToken);
 
 app.set('view engine', 'ejs');
 app.use("/", function (req, res, next) {
@@ -201,16 +208,16 @@ app.get('/dailies/new', function(req, res) {
 });
 
 app.post('/dailies', function(req, res) {
-	console.log("HERE");
-	console.log(req.body);
+	//console.log("HERE");
+	//console.log(req.body);
 	db.Daily.create(req.body.daily)
 			.then(function(dailies) {
-				console.log("HERE2");
+				//console.log("HERE2");
 				req.currentUser().then(function(user){
 				    client.messages.create({
 				    body: req.body.daily.comment,
-				    to: env.NUM1, // user.getSpecialist.phone
-				    from: env.NUM2
+				    to: NUM1, // user.getSpecialist.phone
+				    from: NUM2
 					}, function(err, message) {
    					 process.stdout.write(message.sid);
    					 res.redirect('/dailies');
