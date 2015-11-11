@@ -25,17 +25,17 @@ app.set('view engine', 'ejs');
 app.use("/", function (req, res, next) {
 	req.login = function(user, specialist) {
 		if (user) {
-			console.log("req.login => I'M A USER!");
+			//console.log("req.login => I'M A USER!");
 			req.session.userId = user.id;
 		} else if (specialist) {
-			console.log("req.login => I'M A SPECIALIST!");
+			//console.log("req.login => I'M A SPECIALIST!");
 			req.session.specialist = specialist.id;
 		}
 		// console.log('\n\n\n\n\n\n\n\n\n', req.session.specialist);
 	};
 	req.currentUser = function(specialist) {
 		if (req.session.specialist) {
-			console.log("req.currentuser() => IM A SPECIALIST");
+			//console.log("req.currentuser() => IM A SPECIALIST");
 		  return db.Specialist.find(req.session.specialist)
 			.then(function(user) {
 				req.user = user;
@@ -82,7 +82,7 @@ app.get('/contact', function(req, res) {
 app.get("/signup", function(req, res) {
 	req.currentUser().then(function(user) {
 		if (user) {
-			console.log('Logging ' + user.email + ' out!');
+			//console.log('Logging ' + user.email + ' out!');
 			req.logout();
 			res.redirect('/signup');
 		} else {
