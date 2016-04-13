@@ -20,6 +20,7 @@ var accountSid = env.TWILIO_ACCOUNT_SID;
 var authToken = env.TWILIO_AUTH_TOKEN;
 //console.log(authToken);
 var client = require('twilio')(accountSid, authToken);
+//console.log(client);
 
 app.set('view engine', 'ejs');
 app.use("/", function (req, res, next) {
@@ -219,6 +220,13 @@ app.post('/dailies', function(req, res) {
 				    to: NUM1, // user.getSpecialist.phone
 				    from: NUM2
 					}, function(err, message) {
+						// if (err){
+						// 	console.log(err);
+						// 	console.log(message.sid);
+						// 	console.log(message);
+						// } else {
+						// 	console.log(message.sid);
+						// }
    					 process.stdout.write(message.sid);
    					 res.redirect('/dailies');
 					});
