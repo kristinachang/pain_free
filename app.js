@@ -275,6 +275,7 @@ app.get("/specialists/login", function(req, res) {
 
 app.post("/specialists/login", function(req, res) {
 	var email = req.body.email;
+	console.log(email)
 	var password = req.body.password;
 	db.Specialist.authenticate(email, password)
 	  .then(function(specialist) {

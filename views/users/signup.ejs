@@ -1,73 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Client Sign Up Page</title>
 
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Bootstrap core CSS -->
+    <link type="text/css" rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+    <!-- Custom styles for this template -->
+    <link type="text/css" rel="stylesheet" href="/stylesheets/style.css">
+		<!-- <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"> -->
+		<!-- <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css"> -->
+		<link type="text/css" rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+		<!-- <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Playfair+Display:400,700,400italic"> -->
+	</head>
 
-	<title>Client Sign Up</title>
+	<body>
+		<!-- Navbar -->
+		<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+			<div class="nav-container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>	
+					<a class="navbar-brand" href="/">The Painfree App</a>	
+				</div> <!-- end .navbar-header -->
+				<div class="navbar-collapse collapse">
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="/">Home</a></li>
+						<li><a href="/about">About</a></li>
+						<li><a href="/contact">Contact</a></li>
+					</ul>
+				</div> <!-- end .navbar-collapse -->
+			</div> <!-- end .nav-container -->
+		</div> <!-- end. .navbar -->
 
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
-
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-
-	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="/stylesheets/style.css">
-	<link href='http://fonts.googleapis.com/css?family=Playfair+Display:400,700,400italic' rel='stylesheet' type='text/css'>
-</head>
-<body>
-
-	<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+		<!-- Jumbotron -->
 		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>	
-				<a class="navbar-brand" href="/">The Painfree App</a>	
-			</div>
-			<div class="navbar-collapse collapse">
-				<ul class="nav navbar-nav navbar-right">
-					<li class="active"><a href="/">Home</a></li>
-					<li><a href="/about">About</a></li>
-					<li><a href="/contact">Contact</a></li>
-				</ul>
-			</div>
-		</div>
-	</div>
+			<div class="jumbotron">
+				<h2>Client Sign Up</h2>
+				<a href="/login">Have an account already? Log In</a>
+				<br>
+				<a href="/specialists/login">I'm a Practitioner</a>
+				<form method="POST" class="form" action="/signup">
+					<div class="row">
+						<div class="col-sm-6">
+							<!-- <label for="email">Email</label> -->
+							<input type="text" class="form-control" id="email" name="email" placeholder="Email" required="" oninput="buttonEnable();" autofocus="">
+						</div> <!-- end .col-sm-6 -->
+						<div class="col-sm-6">
+							<!-- <label for="password">Password</label> -->
+							<input type="password" class="form-control" id="password" name="password" placeholder="Password" required="" oninput="buttonEnable();">
+						</div> <!-- end .col-sm-6 -->
+					</div> <!-- end .row -->
+					<br>
+					<button class="button" type="submit" id="submitButton" disabled>Sign Up</button>
+				</form> <!-- end form -->
+			</div> <!-- end .jumbotron -->
+		</div> <!-- end .container -->
 
-	<div class="container">
-		<div class="jumbotron text-center">
-			<h3>New Client - Please enter your email and password to begin.</h3>
-			<form method="POST" action="/signup">
-				<input type="text" name="email" placeholder="Email">
-				<input type="password" name="password" placeholder="Password">
-				<button>Sign Up</button>
-			</form>
-		</div>
-	</div>
+		<!-- Footer -->
+		<div class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
+			<div class="nav-container">
+				<div class="navbar-text pull-left">
+					<p>© 2015 The Painfree App</p>
+				</div> <!-- end .navbar-text pull-left -->
+				<div class="navbar-text pull-right">
+					<a href="#"><i class="fa fa-facebook-square fa-2x"></i></a>
+					<a href="#"><i class="fa fa-twitter fa-2x"></i></a>
+					<a href="#"><i class="fa fa-linkedin fa-2x"></i></a>
+					<a href="#"><i class="fa fa-trello fa-2x"></i></a>
+				</div> <!-- end .navbar-text pull-right -->
+			</div> <!-- end .nav-container -->
+		</div> <!-- end footer -->
 
-	
-
-
-	<div class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
-		<div class="container">
-			<div class="navbar-text pull-left">
-				<p>© 2015 The Painfree App</p>
-			</div>
-			<div class="navbar-text pull-right">
-				<a href="#"><i class="fa fa-facebook-square fa-2x"></i></a>
-				<a href="#"><i class="fa fa-twitter fa-2x"></i></a>
-				<a href="#"><i class="fa fa-linkedin fa-2x"></i></a>
-				<a href="#"><i class="fa fa-trello fa-2x"></i></a>
-			</div>
-		</div>
-	</div>
-
-</body>
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+		<!-- Include all compiled plugins (below), or include individual files as needed -->
+		<script src="/stylesheets/bootstrap.min.js"></script>
+    <script>    
+      // Enable submit button when form completed
+      function buttonEnable() {
+        //console.log("buttonEnable was called");
+        var email = document.getElementById("email").value;
+        var password = document.getElementById("password").value;
+        var buttonElement = document.getElementById("submitButton");
+        
+        if ((email!="")&&(password!="")) {
+          buttonElement.disabled = false;
+        }
+        else {
+          buttonElement.disabled = true;
+        };
+      };    
+    </script>
+	</body>
 </html>
