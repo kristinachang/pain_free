@@ -1,147 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Practitioner Profile</title>
 
-	<title>Client Profile</title>
+    <!-- Bootstrap core CSS -->
+    <link type="text/css" rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+    <!-- Custom styles for this template -->
+    <link type="text/css" rel="stylesheet" href="/stylesheets/style.css">
+    <!-- <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"> -->
+    <!-- <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css"> -->
+    <link type="text/css" rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <!-- <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Playfair+Display:400,700,400italic"> -->
+  </head>
 
-	<link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+  <body>
+    <!-- Navbar -->
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="nav-container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button> 
+          <a class="navbar-brand" href="/">The Painfree App</a> 
+        </div> <!-- end .navbar-header -->
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
+          </ul>
+        </div> <!-- end .navbar-collapse -->
+      </div> <!-- end .nav-container -->
+    </div> <!-- end .navbar -->
 
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+    <!-- Jumbotron -->
+    <div class="container">
+      <div class="jumbotron">
+      	<h3>Welcome <%= specialist.email %>!</h3>
+				<h4>Please complete your profile to continue:</h4>
+				<!-- <h5>THIS IS THE PROFILE ID: <%= specialist.id %></h5> -->
 
-	
-	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="/stylesheets/style.css">
-	<link href='http://fonts.googleapis.com/css?family=Playfair+Display:400,700,400italic' rel='stylesheet' type='text/css'>
-</head>
-<body>
+        <form method="POST" class="form" action="/specialists/profile?_method=PUT">
+          <div class="row">
+            <div class="col-sm-6">
+       				<input type="text" class="form-control" id="firstname" name="first_name" placeholder="First Name" value="<%=specialist.first_name %>" required="" oninput="buttonEnable();" autofocus="">
+       			</div> <!-- end .col-sm-6 -->
+       			<div class="col-sm-6">
+  						<input type="text" class="form-control" id="lastname" name="last_name" placeholder="Last Name" value="<%=specialist.last_name %>" required="" oninput="buttonEnable();">
+            </div> <!-- end .col-sm-6 -->
+          </div> <!-- end .row -->
 
-	<div class="navbar navbar-default navbar-fixed-top" role="navigation">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>	
-				<a class="navbar-brand" href="/">The Painfree App</a>	
-			</div>
-			<div class="navbar-collapse collapse">
-				<ul class="nav navbar-nav navbar-right">
-					<li class="active"><a href="/">Home</a></li>
-					<li><a href="/about">About</a></li>
-					<li><a href="/contact">Contact</a></li>
-				</ul>
-			</div>
-		</div>
-	</div>
+					<div class="row">
+          	<div class="col-sm-12">
+  						<input type="text" class="form-control" id="address1" name="address_1" placeholder="Address" value="<%=specialist.address_1 %>" required="">
+  					</div> <!-- end .col-sm-12 -->
+					</div> <!-- end .row -->
 
+					<div class="row">
+          	<div class="col-sm-12">
+  						<input type="text" class="form-control" id="address2" name="address_2" placeholder="Address Line 2" value="<%=specialist.address_2 %>">
+  					</div> <!-- end .col-sm-12 -->
+					</div> <!-- end .row -->
+					
+					<div class="row">
+						<div class="col-sm-4">
+  						<input type="text" class="form-control" id="city" name="city" placeholder="City" value="<%=specialist.city %>" required>
+  					</div> <!-- end .col-sm-4 -->
+  					<div class="col-sm-4">
+  						<input type="text" class="form-control" id="state" name="state" placeholder="State" value="<%=specialist.state %>" required>
+  					</div> <!-- end .col-sm-4 -->
+  					<div class="col-sm-4">
+  						<input type="text" class="form-control" id="zip" name="zip" placeholder="Zip Code" value="<%=specialist.zip %>" required>
+  					</div> <!-- end .col-sm-4 -->
+  				</div> <!-- end .row -->
 
+					<div class="row">
+						<div class="col-sm-4">
+  						<input type="text" class="form-control" id="phone" name="phone" placeholder="Phone Number" value="<%=specialist.phone %>" required>
+  					</div> <!-- end .col-sm-4 -->
+  					<div class="col-sm-4">
+  						<input type="text" class="form-control" id="age" name="age" placeholder="Age" value="<%=specialist.age %>" required>
+  					</div> <!-- end .col-sm-4 -->
+  					<div class="col-sm-4">
+  						<input type="text" class="form-control" id="occupation" name="occupation" placeholder="Occupation" value="<%=specialist.occupation %>" required>
+  					</div> <!-- end .col-sm-4 -->
+					</div> <!-- end .row -->
 
-	<div class="container">
-		<h3>Welcome <%= specialist.email %> !</h3>
-		<h4>Please complete your profile to continue:</h4>
-	
-		<h5>THIS IS THE PROFILE ID: <%= specialist.id %></h5>
+          <div class="row">
+            <div class="col-sm-12">
+              <textarea class="form-control" name="certs" placeholder="Certifications" value="<%=specialist.certs %>" required></textarea>
+            </div> <!-- end .col-sm-12 -->
+           </div> <!-- end .row -->
 
-		<div class="row">
-  			<div class="col-xs-12 col-sm-6 col-md-8">
-  				<form method="POST" action="/specialists/profile?_method=PUT" class="form-horizontal" role="form">
+          <button class="button" type="submit" id="submitButton" disabled>Save and Continue</button>
+        </form> <!-- end form -->
 
-					<div class="form-group">
-  						<div class="col-xs-4">
-  							<input type="text" name="first_name" placeholder="First Name" value="<%=specialist.first_name %>" required>
-  						</div>
-  						<div class="col-xs-4">
-  							<input type="text" name="last_name" placeholder="Last Name" value="<%=specialist.last_name %>" required>
-  						</div>
-  					</div>
+        <form method="POST" action="/logout?_method=DELETE">
+          <button>Logout</button>
+        </form> <!-- end form -->
+      </div> <!-- end .jumbotron -->
+    </div> <!-- end .container -->
 
-  					<div class="form-group">
-  						<div class="col-xs-9">
-  							<input type="text" name="address_1" placeholder="Address" value="<%=specialist.address_1 %>" required>
-  						</div>
-  					</div>
-  					<div class="form-group">
-  						<div class="col-xs-9">
-  							<input type="text" name="address_2" placeholder="Address Line 2" value="<%=specialist.address_2 %>">
-  						</div>
-  					</div>
+    <!-- Footer -->
+    <div class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
+      <div class="nav-container">
+        <div class="navbar-text pull-left">
+          <p>© 2015 The Painfree App</p>
+        </div> <!-- end .navbar-text pull-left -->
+        <div class="navbar-text pull-right">
+          <a href="#"><i class="fa fa-facebook-square fa-2x"></i></a>
+          <a href="#"><i class="fa fa-twitter fa-2x"></i></a>
+          <a href="#"><i class="fa fa-linkedin fa-2x"></i></a>
+          <a href="#"><i class="fa fa-trello fa-2x"></i></a>
+        </div> <!-- end .navbar-text pull-right -->
+      </div> <!-- end .nav-container -->
+    </div> <!-- end footer -->
 
-					<div class="form-group">
-  						<div class="col-xs-4">
-  							<input type="text" name="city" placeholder="City" value="<%=specialist.city %>" required>
-  						</div>
-  						<div class="col-xs-4">
-  							<input type="text" name="state" placeholder="State" value="<%=specialist.state %>" required>
-  						</div>
-  						<div class="col-xs-4">
-  							<input type="text" name="zip" placeholder="Zip Code" value="<%=specialist.zip %>" required>
-  						</div>
-  					</div>
-  					
-  					<div class="form-group">
-  						<div class="col-xs-4">
-  							<input type="text" name="phone" placeholder="Phone Number" value="<%=specialist.phone %>" required>
-  						</div>
-  						<div class="col-xs-4">
-  							<input type="text" name="age" placeholder="Age" value="<%=specialist.age %>" required>
-  						</div>
-  						<div class="col-xs-4">
-  							<input type="text" name="occupation" placeholder="Occupation" value="<%=specialist.occupation %>" required>
-  						</div>
-  					</div>
-  					
-  					<div class="form-group">
-  						<div class="col-xs-8">
-  							<input type="text" name="certs" placeholder="Certifications" value="<%=specialist.certs %>" required>
-  						</div>
-  					</div>
- 
-  					<div class="form-group">
-  						<div class="col-xs-9">
-  							<button>Submit</button>
-  						</div>
-  					</div>	
-  				</form>
-  			</div>
-		</div>	
-	</div>
-
-
-	<div class="container">
-		<div class="row">
-			<div class="col-xs-6">
-				<form method="POST" action="/logout?_method=DELETE">
-					<button>Logout</button>
-				</form>	
-			</div>
-		</div>
-	</div>
-
-
-
-	<div class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
-		<div class="container">
-			<div class="navbar-text pull-left">
-				<p>© 2015 The Painfree App</p>
-			</div>
-			<div class="navbar-text pull-right">
-				<a href="#"><i class="fa fa-facebook-square fa-2x"></i></a>
-				<a href="#"><i class="fa fa-twitter fa-2x"></i></a>
-				<a href="#"><i class="fa fa-linkedin fa-2x"></i></a>
-				<a href="#"><i class="fa fa-trello fa-2x"></i></a>
-			</div>
-		</div>
-	</div>
-
-	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="/stylesheets/bootstrap.min.js"></script>
+    <script>    
+      // Enable submit button when form completed
+      function buttonEnable() {
+        //console.log("buttonEnable was called");
+        var firstname = document.getElementById("firstname").value;
+        var lastname = document.getElementById("lastname").value;
+        var buttonElement = document.getElementById("submitButton");
+        
+        if ((firstname!="")&&(lastname!="")) {
+          buttonElement.disabled = false;
+        }
+        else {
+          buttonElement.disabled = true;
+        };
+      };
+    </script>
   </body>
 </html>
